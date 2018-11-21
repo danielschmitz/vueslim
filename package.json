@@ -18,6 +18,13 @@
     "postgresql"
   ],
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "boom": "^7.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-boom": "^2.0.0",
+    "pg": "^7.6.1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
   },
@@ -27,8 +34,10 @@
     "@vue/cli-service": "^3.1.4",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
+    "concurrently": "^4.1.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "nodemon": "^1.18.6",
     "vue-template-compiler": "^2.5.17"
   },
   "author": "Daniel Schmitz <danieljfa@gmail.com>",
