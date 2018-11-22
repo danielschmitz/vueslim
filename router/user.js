@@ -1,8 +1,9 @@
 
 const router = require('express').Router()
+const db = require('../libs/db')
 
 router.get('/users', (req, res) => {
-  res.send('hello users')
+  return db.select().from('users')
 })
 
 module.exports = router
