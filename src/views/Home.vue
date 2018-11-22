@@ -1,12 +1,17 @@
 <template>
   <div>
-    <h3>Home Screen</h3>
+    <Users />
   </div>
 </template>
 
 <script>
+import Users from './Users.vue'
 
 export default {
-  name: 'home'
+  name: 'home',
+  components: {
+    Users
+  }
+
 }
 </script>
