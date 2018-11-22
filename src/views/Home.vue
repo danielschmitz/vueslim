@@ -1,9 +1,3 @@
-<template>
-  <div>
-    <Users />
-  </div>
-</template>
-
 <script>
 import Users from './Users.vue'
 
@@ -15,3 +9,8 @@ export default {
 
 }
 </script>
+<template>
+  <div>
+    <Users />
+  </div>
+</template>
