@@ -10,6 +10,7 @@ const bodyParser = require('./libs/bodyParser')
 const router = require('./router')
 const errorHandler = require('./libs/error')
 const start = require('./libs/start')
+const dbService = require('./libs/db')
 
 // express instance
 const app = express()
@@ -18,7 +19,7 @@ boomHttp(app)
 staticDir(app, express.static('./dist'), '/')
 cors(app)
 bodyParser(app)
+dbService(app)
 router(app)
 errorHandler(app)
-
 start(app)
