@@ -17,10 +17,13 @@
 
 <script>
 
+import userService from '@/services/user'
+
 export default {
   name: 'Users',
   data () {
     return {
+      users: [],
       headers: [
         {
           text: 'Dessert (100g serving)',
@@ -127,6 +130,11 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    userService.getAll().then(users => {
+      this.users = users
+    })
   }
 
 }
