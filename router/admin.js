@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const db = require('../libs/db')
 
-router.get('/create-tables', (req, res, next) => {
+router.get('/admin/create-tables', (req, res, next) => {
   const queries = [
-    'DROP TABLE IF EXISTS users',
-    'CREATE TABLE users(id SERIAL PRIMARY KEY, firstName VARCHAR(100) not null, lastName VARCHAR(100), email VARCHAR(100))'
+    /* sql */ `DROP TABLE IF EXISTS users`,
+    /* sql */ `CREATE TABLE users(id SERIAL PRIMARY KEY, firstName VARCHAR(100) not null, lastName VARCHAR(100), email VARCHAR(100))`
   ]
 
   db.query(queries.join('; '), null)
