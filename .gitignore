@@ -2,7 +2,7 @@
 node_modules
 /dist
 
-
+database.sqlite3
 
 # local env files
 .env.local
