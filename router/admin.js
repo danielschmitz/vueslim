@@ -14,9 +14,12 @@ router.get('/admin/create-tables', (req, res, next) => {
     db.schema.createTable('tasks', t => {
       t.increments('id').primary()
       t.string('name', 100)
+      t.foreign('user_id').references('id').inTable('users')
     })
   })
-  Promise.all([users, tasks]).then(() => res.send('Tabelas Recriadas'))
+  Promise.all([users, tasks])
+    .then(() => res.send('Tabelas Recriadas'))
+    .catch(error => next(error))
 })
 
 module.exports = router
