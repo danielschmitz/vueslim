@@ -1,26 +1,19 @@
 {
   "name": "vueslim",
   "version": "0.0.1",
-  "description": "A very simple  vue+express application, ready to deploy",
-  "main": "server.js",
   "private": true,
+  "description": "A very simple  vue+express application, ready to deploy",
+  "author": "Daniel Schmitz <danieljfa@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "dev": "concurrently --kill-others \"npm run serve\" \"nodemon server.js\"",
     "postinstall": "npm run build",
-    "start": "node server.js",
-    "dev": "concurrently --kill-others \"npm run serve\" \"nodemon server.js\""
+    "start": "node server.js"
   },
-  "keywords": [
-    "vue",
-    "express",
-    "router",
-    "heroku",
-    "deploy",
-    "postgresql"
-  ],
   "dependencies": {
+    "@babel/polyfill": "^7.0.0-rc.1",
     "body-parser": "^1.18.3",
     "boom": "^7.2.2",
     "cors": "^2.8.5",
@@ -31,7 +24,8 @@
     "pg": "^7.6.1",
     "sqlite3": "^4.0.4",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuetify": "^1.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
@@ -43,8 +37,17 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "nodemon": "^1.18.6",
+    "vue-cli-plugin-vuetify": "^0.4.6",
     "vue-template-compiler": "^2.5.17"
   },
-  "author": "Daniel Schmitz <danieljfa@gmail.com>",
-  "license": "ISC"
+  "keywords": [
+    "vue",
+    "express",
+    "router",
+    "heroku",
+    "deploy",
+    "postgresql"
+  ],
+  "license": "ISC",
+  "main": "server.js"
 }
