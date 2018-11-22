@@ -20,20 +20,19 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>VueSlim App</v-toolbar-title>
-    </v-toolbar>
 
     <v-content>
       <v-card>
-        <v-img class="white--text" src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" aspect-ratio="5">
-          <v-container fill-height fluid>
-            <div>
-              <h3 class="headline mb-0">Welcome to Vue!</h3>
-              <div>This app uses Vue and Vuetify in the frontend. <br />Express and Knex in the backend</div>
-            </div>
-          </v-container>
+        <v-img class="white--text" src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" aspect-ratio="6">
+          <v-btn flat icon dark @click="drawer=!drawer">
+            <v-icon>menu</v-icon>
+          </v-btn>
+
+          <div style="padding-left:15px">
+            <h3 class="headline mb-0">Welcome to Vue!</h3>
+            <div>This app uses Vue and Vuetify in the frontend. <br />Express and Knex in the backend</div>
+          </div>
+
         </v-img>
 
         <v-card-text>
