@@ -17,7 +17,8 @@ export default {
         },
         { text: 'First Name', value: 'first_name' },
         { text: 'Last Name', value: 'last_name' },
-        { text: 'Email', value: 'email' }
+        { text: 'Email', value: 'email' },
+        { text: '', value: 'name', sortable: false }
       ],
       valid: false,
       rules: {
@@ -58,6 +59,10 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+    },
+    onItemEditClick (user) {
+      this.user = user
+      this.dialog = true
     }
   }
 }
@@ -73,10 +78,20 @@ export default {
       <v-card-text>
         <v-data-table :headers="headers" :items="users" class="elevation-0" v-if="users.length>0">
           <template slot="items" slot-scope="props">
+
             <td>{{ props.item.id }}</td>
             <td>{{ props.item.first_name }}</td>
             <td>{{ props.item.last_name }}</td>
             <td>{{ props.item.email }}</td>
+            <td class="justify-center layout px-0">
+              <v-icon small class="mr-2" @click="onItemEditClick(props.item)">
+                edit
+              </v-icon>
+              <v-icon small @click="onItemDeleteClick(props.item)">
+                delete
+              </v-icon>
+            </td>
+
           </template>
         </v-data-table>
       </v-card-text>

@@ -9,9 +9,15 @@ router.get('/users', (req, res, next) => {
 })
 
 router.post('/user', (req, res, next) => {
-  console.log(req.body)
-  db('users').insert(req.body).returning('*').then(user => {
+  db('users').insert(req.body).then(user => {
     res.send(user)
+  })
+})
+
+router.put('/user/:id', (req, res, next) => {
+  const { id } = req.params
+  db('users').update(req.body).where('id', id).then(user => {
+    res.json(user)
   })
 })
 
