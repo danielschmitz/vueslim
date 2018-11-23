@@ -33,7 +33,8 @@ export default {
           v => (v != null && /.+@.+/.test(v)) || 'E-mail must be valid'
         ]
       },
-      tableUserLoadingVisible: false
+      tableUserLoadingVisible: false,
+      buttonSaveLoadingVisible: false
 
     }
   },
@@ -56,11 +57,14 @@ export default {
       this.dialog = true
     },
     onSaveUserButtonClick () {
+      this.buttonSaveLoadingVisible = true;
       userService.save(this.user).then(result => {
         this.dialog = false
         this.refreshUsers()
       }).catch(error => {
         console.log(error)
+      }).finally( () => {
+        this.buttonSaveLoadingVisible = false
       })
     },
     onItemEditClick (user) {
@@ -142,7 +146,7 @@ export default {
             Delete
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :disabled="!valid" flat @click="onSaveUserButtonClick()">
+          <v-btn color="primary" :disabled="!valid" :loading="buttonSaveLoadingVisible" flat @click="onSaveUserButtonClick()">
             Salvar
           </v-btn>
         </v-card-actions>
