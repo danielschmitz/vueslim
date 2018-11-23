@@ -42,6 +42,8 @@ export default {
     refreshUsers () {
       userService.getAll().then(result => {
         this.users = result.data
+      }).catch(error => {
+        console.error(error)
       })
     },
     onNewUserButtonClick () {
