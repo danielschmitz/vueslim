@@ -23,4 +23,11 @@ router.put('/user/:id', (req, res, next) => {
   }).catch(e => next(e))
 })
 
+router.delete('/user/:id', (req, res, next) => {
+  const { id } = req.params
+  db('users').delete().where({ id }).then(() => {
+    res.send('ok')
+  }).catch(e => next(e))
+})
+
 module.exports = router

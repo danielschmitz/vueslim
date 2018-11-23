@@ -9,7 +9,8 @@ const userService = {
     method: 'id' in data ? 'put' : 'post',
     url: 'id' in data ? `/user/${data.id}` : '/user',
     data
-  })
+  }),
+  delete: id => http.delete(`/user/${id}`)
 }
 
 export default userService

@@ -53,7 +53,6 @@ export default {
     },
     onSaveUserButtonClick () {
       userService.save(this.user).then(result => {
-        console.log(result)
         this.dialog = false
         this.refreshUsers()
       }).catch(error => {
@@ -63,6 +62,12 @@ export default {
     onItemEditClick (user) {
       this.user = user
       this.dialog = true
+    },
+    onDeleteUserButtonClick (user) {
+      userService.delete(user.id).then(result => {
+        this.dialog = false
+        this.refreshUsers()
+      })
     }
   }
 }
@@ -87,7 +92,7 @@ export default {
               <v-icon small class="mr-2" @click="onItemEditClick(props.item)">
                 edit
               </v-icon>
-              <v-icon small @click="onItemDeleteClick(props.item)">
+              <v-icon small @click="onDeleteUserButtonClick(props.item)">
                 delete
               </v-icon>
             </td>
@@ -124,6 +129,9 @@ export default {
         <v-divider></v-divider>
 
         <v-card-actions>
+          <v-btn color="warning" v-if="user.id!=null" flat @click="onDeleteUserButtonClick(user)">
+            Delete
+          </v-btn>
           <v-spacer></v-spacer>
           <v-btn color="primary" :disabled="!valid" flat @click="onSaveUserButtonClick()">
             Salvar
