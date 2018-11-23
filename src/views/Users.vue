@@ -1,5 +1,6 @@
 <script>
 import userService from '@/services/user'
+import alertService from '@/services/alert'
 
 export default {
   name: 'Users',
@@ -40,6 +41,7 @@ export default {
   },
   mounted () {
     this.refreshUsers()
+    //alertService.toast('test')
   },
   methods: {
     refreshUsers () {
@@ -60,6 +62,7 @@ export default {
       this.buttonSaveLoadingVisible = true;
       userService.save(this.user).then(result => {
         this.dialog = false
+        alertService.toast("Usuário inserido com sucesso")
         this.refreshUsers()
       }).catch(error => {
         console.log(error)

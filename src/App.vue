@@ -21,6 +21,21 @@
       </v-list>
     </v-navigation-drawer>
 
+    <v-snackbar
+      v-model="toast.show"
+      :color="toast.color"
+      :timeout="toast.timeout"
+    >
+      {{ toast.text }}
+      <v-btn
+        dark
+        flat
+        @click="toast.show = false"
+      >
+      <v-icon>close</v-icon>
+      </v-btn>
+    </v-snackbar>
+
     <v-content>
       <v-card>
         <v-img class="white--text" src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" aspect-ratio="9">
@@ -56,11 +71,14 @@
 
 <script>
 
+  import alertService from './services/alert'
+
 export default {
   name: 'App',
   data () {
     return {
-      drawer: null
+      drawer: null,
+      toast: alertService.snackbar
     }
   }
 }
