@@ -46,7 +46,7 @@ export default {
       userService.getAll().then(result => {
         this.users = result.data
       }).catch(error => {
-        console.error(error)
+        console.log('error', error)
       }).finally(() => {
         this.tableUserLoadingVisible = false
       })
@@ -70,9 +70,12 @@ export default {
     onDeleteUserButtonClick (user) {
       this.tableUserLoadingVisible = true
       userService.delete(user.id).then(result => {
-        this.tableUserLoadingVisible = false
         this.dialog = false
         this.refreshUsers()
+      }).catch(error => {
+        console.log('error', error)
+      }).finally(() => {
+        this.tableUserLoadingVisible = false
       })
     }
   }
