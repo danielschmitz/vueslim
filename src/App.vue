@@ -52,6 +52,18 @@
       </v-btn>
     </v-snackbar>
 
+    <v-dialog v-model="confirm.show" persistent max-width="290">
+        <v-card>
+          <v-card-title class="headline">Please Confirm</v-card-title>
+          <v-card-text>{{confirm.text}}</v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1" flat @click="confirm.choice(false)">No</v-btn>
+            <v-btn color="red darken-1" flat @click="confirm.choice(true)">yes</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
     <v-content>
       <v-card>
         <v-img class="white--text" src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" aspect-ratio="9">
@@ -95,7 +107,8 @@ export default {
     return {
       drawer: null,
       toast: alertService.snackbar,
-      dialog: alertService.dialog
+      dialog: alertService.dialog,
+      confirm: alertService.confirmConfig
     }
   }
 }

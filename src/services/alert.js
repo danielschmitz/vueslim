@@ -31,6 +31,20 @@ const alertService = {
     this.dialog.color = 'error'
     this.dialog.text = msg
     this.dialog.show = true
+  },
+  confirmConfig: {
+    show: false,
+    text: '',
+    callback: null,
+    choice: function (result) {
+      alertService.confirmConfig.show = false
+      alertService.confirmConfig.callback(result)
+    }
+  },
+  confirm: function (msg, callback) {
+    this.confirmConfig.text = msg
+    this.confirmConfig.callback = callback
+    this.confirmConfig.show = true
   }
 }
 
