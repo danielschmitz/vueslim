@@ -32,7 +32,8 @@ export default {
           v => !!v || 'Email is required',
           v => (v != null && /.+@.+/.test(v)) || 'E-mail must be valid'
         ]
-      }
+      },
+      tableUserLoadingVisible: false
 
     }
   },
@@ -41,10 +42,13 @@ export default {
   },
   methods: {
     refreshUsers () {
+      this.tableUserLoadingVisible = true
       userService.getAll().then(result => {
         this.users = result.data
       }).catch(error => {
         console.error(error)
+      }).finally(() => {
+        this.tableUserLoadingVisible = false
       })
     },
     onNewUserButtonClick () {
@@ -64,7 +68,9 @@ export default {
       this.dialog = true
     },
     onDeleteUserButtonClick (user) {
+      this.tableUserLoadingVisible = true
       userService.delete(user.id).then(result => {
+        this.tableUserLoadingVisible = false
         this.dialog = false
         this.refreshUsers()
       })
@@ -81,9 +87,9 @@ export default {
         <v-btn @click="onNewUserButtonClick()" color="primary">New User</v-btn>
       </v-card-title>
       <v-card-text>
-        <v-data-table :headers="headers" :items="users" class="elevation-0" v-if="users.length>0">
+        <v-data-table :headers="headers" :items="users" :loading="tableUserLoadingVisible" class="elevation-0" v-if="users.length>0">
+          <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
           <template slot="items" slot-scope="props">
-
             <td>{{ props.item.id }}</td>
             <td>{{ props.item.first_name }}</td>
             <td>{{ props.item.last_name }}</td>
