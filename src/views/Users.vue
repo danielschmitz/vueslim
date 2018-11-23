@@ -41,7 +41,6 @@ export default {
   },
   mounted () {
     this.refreshUsers()
-    //alertService.toast('test')
   },
   methods: {
     refreshUsers () {
@@ -62,7 +61,9 @@ export default {
       this.buttonSaveLoadingVisible = true;
       userService.save(this.user).then(result => {
         this.dialog = false
-        alertService.toast("Usuário inserido com sucesso")
+        //alertService.toast("Usuário inserido com sucesso")
+        alertService.ok('Operação realizada com sucesso!')
+
         this.refreshUsers()
       }).catch(error => {
         console.log(error)

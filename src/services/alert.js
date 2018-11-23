@@ -16,6 +16,21 @@ const alertService = {
     this.snackbar.text = msg
     this.snackbar.timeout = 4000
     this.snackbar.show = true
+  },
+  dialog: {
+    show: false,
+    color: 'primary',
+    text: ''
+  },
+  ok: function (msg) {
+    this.dialog.color = 'primary'
+    this.dialog.text = msg
+    this.dialog.show = true
+  },
+  error: function (msg) {
+    this.dialog.color = 'error'
+    this.dialog.text = msg
+    this.dialog.show = true
   }
 }
 

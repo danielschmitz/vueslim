@@ -21,6 +21,22 @@
       </v-list>
     </v-navigation-drawer>
 
+    <v-dialog
+      v-model="dialog.show"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-text>
+          {{dialog.text}}
+        </v-card-text>
+          <v-card-text style="padding-bottom:1px">
+              <p class="text-xs-center">
+              <v-btn :color="dialog.color" @click="dialog.show=false">Ok</v-btn>
+              </p>
+          </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <v-snackbar
       v-model="toast.show"
       :color="toast.color"
@@ -78,7 +94,8 @@ export default {
   data () {
     return {
       drawer: null,
-      toast: alertService.snackbar
+      toast: alertService.snackbar,
+      dialog: alertService.dialog
     }
   }
 }
