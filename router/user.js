@@ -16,9 +16,11 @@ router.post('/user', (req, res, next) => {
 
 router.put('/user/:id', (req, res, next) => {
   const { id } = req.params
-  db('users').update(req.body).where('id', id).then(user => {
-    res.json(user)
-  })
+  db('users').update(req.body).where({ id }).then(() => {
+    db('users').select().where({ id }).then(user => {
+      res.json(user)
+    }).catch(e => next(e))
+  }).catch(e => next(e))
 })
 
 module.exports = router
