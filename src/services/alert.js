@@ -1,50 +1,54 @@
 const alertService = {
-  snackbar: {
-    color: 'primary',
-    timeout: 3000,
-    text: '',
-    show: false
-  },
-  toast: function (msg) {
-    this.snackbar.color = 'primary'
-    this.snackbar.text = msg
-    this.snackbar.timeout = 3000
-    this.snackbar.show = true
-  },
-  toastError: function (msg) {
-    this.snackbar.color = 'error'
-    this.snackbar.text = msg
-    this.snackbar.timeout = 4000
-    this.snackbar.show = true
-  },
-  dialog: {
-    show: false,
-    color: 'primary',
-    text: ''
-  },
-  ok: function (msg) {
-    this.dialog.color = 'primary'
-    this.dialog.text = msg
-    this.dialog.show = true
-  },
-  error: function (msg) {
-    this.dialog.color = 'error'
-    this.dialog.text = msg
-    this.dialog.show = true
-  },
-  confirmConfig: {
-    show: false,
-    text: '',
-    callback: null,
-    choice: function (result) {
-      alertService.confirmConfig.show = false
-      alertService.confirmConfig.callback(result)
+  config: {
+    snackbar: {
+      color: 'primary',
+      timeout: 3000,
+      text: '',
+      show: false
+    },
+    dialog: {
+      show: false,
+      color: 'primary',
+      text: ''
+    },
+    confirm: {
+      show: false,
+      text: '',
+      callback: null,
+      choice: function (result) {
+        alertService.config.confirm.show = false
+        alertService.config.confirm.callback(result)
+      }
     }
   },
+  toast: function (msg) {
+    this.config.snackbar.color = 'primary'
+    this.config.snackbar.text = msg
+    this.config.snackbar.timeout = 3000
+    this.config.snackbar.show = true
+  },
+  toastError: function (msg) {
+    this.config.snackbar.color = 'error'
+    this.config.snackbar.text = msg
+    this.config.snackbar.timeout = 4000
+    this.config.snackbar.show = true
+  },
+
+  ok: function (msg) {
+    this.config.dialog.color = 'primary'
+    this.config.dialog.text = msg
+    this.config.dialog.show = true
+  },
+  error: function (msg) {
+    this.config.dialog.color = 'error'
+    this.config.dialog.text = msg
+    this.config.dialog.show = true
+  },
+
   confirm: function (msg, callback) {
-    this.confirmConfig.text = msg
-    this.confirmConfig.callback = callback
-    this.confirmConfig.show = true
+    this.config.confirm.text = msg
+    this.config.confirm.callback = callback
+    this.config.confirm.show = true
   }
 }
 
