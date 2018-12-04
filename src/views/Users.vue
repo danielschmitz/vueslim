@@ -1,105 +1,104 @@
 <script>
-  import userService from '@/services/user';
-  import alertService from '@/services/alert';
+import userService from '@/services/user'
+import alertService from '@/services/alert'
 
-  export default {
-    name: 'Users',
-    data() {
-      return {
-        dialog: false,
-        user: {},
-        users: [],
-        headers: [
-          {
-            text: 'id',
-            align: 'left',
-            sortable: false,
-            value: 'id'
-          },
-          { text: 'First Name', value: 'first_name' },
-          { text: 'Last Name', value: 'last_name' },
-          { text: 'Email', value: 'email' },
-          { text: '', value: 'name', sortable: false }
-        ],
-        valid: false,
-        rules: {
-          firstNameRules: [v => !!v || 'First Name is required'],
-          lastNameRules: [v => !!v || 'Last Name is required'],
-          emailRules: [
-            v => !!v || 'Email is required',
-            v => (v != null && /.+@.+/.test(v)) || 'E-mail must be valid'
-          ]
+export default {
+  name: 'Users',
+  data () {
+    return {
+      dialog: false,
+      user: {},
+      users: [],
+      headers: [
+        {
+          text: 'id',
+          align: 'left',
+          sortable: false,
+          value: 'id'
         },
-        tableUserLoadingVisible: false,
-        buttonSaveLoadingVisible: false
-      };
-    },
-    mounted() {
-      this.refreshUsers();
-    },
-    methods: {
-      refreshUsers() {
-        this.tableUserLoadingVisible = true;
-        userService
-          .getAll()
-          .then(result => {
-            this.users = result.data;
-          })
-          .catch(error => {
-            console.log('error', error);
-          })
-          .finally(() => {
-            this.tableUserLoadingVisible = false;
-          });
+        { text: 'First Name', value: 'first_name' },
+        { text: 'Last Name', value: 'last_name' },
+        { text: 'Email', value: 'email' },
+        { text: '', value: 'name', sortable: false }
+      ],
+      valid: false,
+      rules: {
+        firstNameRules: [v => !!v || 'First Name is required'],
+        lastNameRules: [v => !!v || 'Last Name is required'],
+        emailRules: [
+          v => !!v || 'Email is required',
+          v => (v != null && /.+@.+/.test(v)) || 'E-mail must be valid'
+        ]
       },
-      onNewUserButtonClick() {
-        this.user = {};
-        this.dialog = true;
-      },
-      onSaveUserButtonClick() {
-        this.buttonSaveLoadingVisible = true;
-        userService
-          .save(this.user)
-          .then(result => {
-            this.dialog = false;
-            //alertService.toast("Usuário inserido com sucesso")
-            alertService.ok('Operação realizada com sucesso!');
-
-            this.refreshUsers();
-          })
-          .catch(error => {
-            console.log(error);
-          })
-          .finally(() => {
-            this.buttonSaveLoadingVisible = false;
-          });
-      },
-      onItemEditClick(user) {
-        this.user = user;
-        this.dialog = true;
-      },
-      onDeleteUserButtonClick(user) {
-        alertService.confirm('Tem certeza?', r => {
-          if (r) {
-            this.tableUserLoadingVisible = true;
-
-            userService
-              .delete(user.id)
-              .then(result => {
-                this.dialog = false;
-                this.refreshUsers();
-              })
-              .catch(error => {
-                console.log('error', error);
-              })
-              .finally(() => {
-                this.tableUserLoadingVisible = false;
-              });
-          }
-        });
-      }
+      tableUserLoadingVisible: false,
+      buttonSaveLoadingVisible: false
     }
-  };
+  },
+  mounted () {
+    this.refreshUsers()
+  },
+  methods: {
+    refreshUsers () {
+      this.tableUserLoadingVisible = true
+      userService
+        .getAll()
+        .then(result => {
+          this.users = result.data
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+        .finally(() => {
+          this.tableUserLoadingVisible = false
+        })
+    },
+    onNewUserButtonClick () {
+      this.user = {}
+      this.dialog = true
+    },
+    onSaveUserButtonClick () {
+      this.buttonSaveLoadingVisible = true
+      userService
+        .save(this.user)
+        .then(result => {
+          this.dialog = false
+          // alertService.toast("Usuário inserido com sucesso")
+          alertService.ok('Operação realizada com sucesso!')
+
+          this.refreshUsers()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        .finally(() => {
+          this.buttonSaveLoadingVisible = false
+        })
+    },
+    onItemEditClick (user) {
+      this.user = user
+      this.dialog = true
+    },
+    onDeleteUserButtonClick (user) {
+      alertService.confirm('Tem certeza?', r => {
+        if (r) {
+          this.tableUserLoadingVisible = true
+          userService
+            .delete(user.id)
+            .then(result => {
+              this.dialog = false
+              this.refreshUsers()
+            })
+            .catch(error => {
+              console.log('error', error)
+            })
+            .finally(() => {
+              this.tableUserLoadingVisible = false
+            })
+        }
+      })
+    }
+  }
+}
 </script>
 <template>
   <div>
