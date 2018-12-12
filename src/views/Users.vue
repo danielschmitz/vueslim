@@ -9,6 +9,7 @@ export default {
   name: 'Users',
   data () {
     return {
+      store,
       dialog: false,
       user: {},
       users: [],
@@ -38,7 +39,7 @@ export default {
     }
   },
   mounted () {
-    this.refreshUsers()
+    if (store.isLogged()) { this.refreshUsers() }
   },
   methods: {
     refreshUsers () {
@@ -105,12 +106,13 @@ export default {
     Login () {
       authService.login('bond', '123').then(result => {
         store.login(result.data.token)
-        alertService.toast('Login realizado com sucesso')
+        this.refreshUsers()
+        alertService.ok('Login realizado com sucesso. Abra o console (F12) e veja o token de autenticação sendo enviado ao servidor')
       }).catch(error => console.log(error))
     },
     Logout () {
       store.logout()
-      alertService.toast('Login realizado com sucesso')
+      alertService.toast('Saiu')
       this.users = []
     },
     CreateTables () {
@@ -119,6 +121,8 @@ export default {
           adminService.createTables().then(result => {
             alertService.toast('Tabelas criadas')
             this.refreshUsers()
+          }).catch(error => {
+            alertService.toastError('Erro! Você está logado?')
           })
         }
       })
@@ -128,9 +132,13 @@ export default {
 </script>
 <template>
   <div>
-    <v-card class="elevation-0">
-      <v-btn @click="Login()">Login</v-btn>
-      <v-btn @click="Logout()">Logout</v-btn>
+    <v-btn @click="Login()" v-if="!store.isLogged()">Fake Login</v-btn>
+
+    <v-card class="elevation-0" v-if="store.isLogged()">
+      <v-btn
+        @click="Logout()"
+        v-if="store.isLogged()"
+      >Logout</v-btn>
       <v-btn @click="CreateTables()">Criar tabela user</v-btn>
       <v-btn @click="refreshUsers()">Refresh Users</v-btn>
       <v-card-title>
