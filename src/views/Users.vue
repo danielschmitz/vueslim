@@ -2,6 +2,7 @@
 import userService from '@/services/user'
 import authService from '@/services/auth'
 import alertService from '@/services/alert'
+import store from '@/store'
 
 export default {
   name: 'Users',
@@ -48,6 +49,8 @@ export default {
         })
         .catch(error => {
           console.log('error', error)
+          this.users = []
+          alertService.toastError(error.response.data.message)
         })
         .finally(() => {
           this.tableUserLoadingVisible = false
@@ -100,8 +103,14 @@ export default {
     },
     Login () {
       authService.login('bond', '123').then(result => {
-        console.log(result)
+        store.login(result.data.token)
+        alertService.toast('Login realizado com sucesso')
       }).catch(error => console.log(error))
+    },
+    Logout () {
+      store.logout()
+      alertService.toast('Login realizado com sucesso')
+      this.users = []
     }
   }
 }
@@ -110,6 +119,8 @@ export default {
   <div>
     <v-card class="elevation-0">
       <v-btn @click="Login()">Login</v-btn>
+      <v-btn @click="Logout()">Logout</v-btn>
+      <v-btn @click="refreshUsers()">Refresh Users</v-btn>
       <v-card-title>
         <h3>Users</h3>
         <v-spacer></v-spacer>
