@@ -2,6 +2,7 @@
 import userService from '@/services/user'
 import authService from '@/services/auth'
 import alertService from '@/services/alert'
+import adminService from '@/services/admin'
 import store from '@/store'
 
 export default {
@@ -111,6 +112,16 @@ export default {
       store.logout()
       alertService.toast('Login realizado com sucesso')
       this.users = []
+    },
+    CreateTables () {
+      alertService.confirm('Você tem certeza? Todos os dados da tabela abaixo serão perdidos', (resposta) => {
+        if (resposta) {
+          adminService.createTables().then(result => {
+            alertService.toast('Tabelas criadas')
+            this.refreshUsers()
+          })
+        }
+      })
     }
   }
 }
@@ -120,6 +131,7 @@ export default {
     <v-card class="elevation-0">
       <v-btn @click="Login()">Login</v-btn>
       <v-btn @click="Logout()">Logout</v-btn>
+      <v-btn @click="CreateTables()">Criar tabela user</v-btn>
       <v-btn @click="refreshUsers()">Refresh Users</v-btn>
       <v-card-title>
         <h3>Users</h3>

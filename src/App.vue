@@ -54,12 +54,11 @@
 
     <v-dialog v-model="confirm.show" persistent max-width="290">
         <v-card>
-          <v-card-title class="headline">Please Confirm</v-card-title>
           <v-card-text>{{confirm.text}}</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat @click="confirm.choice(false)">No</v-btn>
-            <v-btn flat @click="confirm.choice(true)">yes</v-btn>
+            <v-btn flat @click="confirm.choice(false)">Não</v-btn>
+            <v-btn flat @click="confirm.choice(true)">Sim</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
