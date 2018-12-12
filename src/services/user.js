@@ -4,13 +4,13 @@ const userService = {
   /**
    * Get all users
    */
-  getAll: () => http.get('/users'),
+  getAll: () => http.get('/api/users'),
   save: data => http({
     method: 'id' in data ? 'put' : 'post',
-    url: 'id' in data ? `/user/${data.id}` : '/user',
+    url: 'id' in data ? `/api/user/${data.id}` : '/api/user',
     data
   }),
-  delete: id => http.delete(`/user/${id}`)
+  delete: id => http.delete(`/api/user/${id}`)
 }
 
 export default userService

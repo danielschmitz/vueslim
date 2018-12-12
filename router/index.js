@@ -11,7 +11,7 @@ const index = app => {
   })
 
   //
-  // Rotas
+  // Rotas Dinâmicas (le os arquivos das pastas)
   //
   fs.readdirSync(__dirname)
     .filter(file => {

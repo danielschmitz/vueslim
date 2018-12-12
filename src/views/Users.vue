@@ -1,5 +1,6 @@
 <script>
 import userService from '@/services/user'
+import authService from '@/services/auth'
 import alertService from '@/services/alert'
 
 export default {
@@ -96,6 +97,11 @@ export default {
             })
         }
       })
+    },
+    Login () {
+      authService.login('bond', '123').then(result => {
+        console.log(result)
+      }).catch(error => console.log(error))
     }
   }
 }
@@ -103,12 +109,17 @@ export default {
 <template>
   <div>
     <v-card class="elevation-0">
+      <v-btn @click="Login()">Login</v-btn>
       <v-card-title>
         <h3>Users</h3>
         <v-spacer></v-spacer>
-        <v-btn @click="onNewUserButtonClick()" color="primary">New User</v-btn>
+        <v-btn
+          @click="onNewUserButtonClick()"
+          color="primary"
+        >New User</v-btn>
       </v-card-title>
       <v-card-text>
+
         <v-data-table
           :headers="headers"
           :items="users"
@@ -121,16 +132,26 @@ export default {
             color="blue"
             indeterminate
           ></v-progress-linear>
-          <template slot="items" slot-scope="props">
+          <template
+            slot="items"
+            slot-scope="props"
+          >
             <td>{{ props.item.id }}</td>
             <td>{{ props.item.first_name }}</td>
             <td>{{ props.item.last_name }}</td>
             <td>{{ props.item.email }}</td>
             <td class="justify-center layout px-0">
-              <v-icon small class="mr-2" @click="onItemEditClick(props.item)">
+              <v-icon
+                small
+                class="mr-2"
+                @click="onItemEditClick(props.item)"
+              >
                 edit
               </v-icon>
-              <v-icon small @click="onDeleteUserButtonClick(props.item)">
+              <v-icon
+                small
+                @click="onDeleteUserButtonClick(props.item)"
+              >
                 delete
               </v-icon>
             </td>
@@ -139,17 +160,30 @@ export default {
       </v-card-text>
     </v-card>
 
-    <v-dialog v-model="dialog" max-width="999">
+    <v-dialog
+      v-model="dialog"
+      max-width="999"
+    >
       <v-card>
-        <v-card-title class="headline grey lighten-2" primary-title>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+        >
           User
         </v-card-title>
 
         <v-card-text>
           <v-form v-model="valid">
             <v-container fluid>
-              <v-layout row wrap>
-                <v-flex xs12 sm6 md4>
+              <v-layout
+                row
+                wrap
+              >
+                <v-flex
+                  xs12
+                  sm6
+                  md4
+                >
                   <v-text-field
                     v-model="user.first_name"
                     :rules="rules.firstNameRules"
@@ -157,7 +191,11 @@ export default {
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
+                <v-flex
+                  xs12
+                  sm6
+                  md4
+                >
                   <v-text-field
                     v-model="user.last_name"
                     :rules="rules.lastNameRules"
@@ -165,7 +203,11 @@ export default {
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm12 md4>
+                <v-flex
+                  xs12
+                  sm12
+                  md4
+                >
                   <v-text-field
                     v-model="user.email"
                     :rules="rules.emailRules"
