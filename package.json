@@ -4,6 +4,9 @@
   "private": true,
   "description": "A very simple  vue+express application, ready to deploy",
   "author": "Daniel Schmitz <danieljfa@gmail.com>",
+  "engines": {
+    "node": "10.3.0"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,7 +14,7 @@
     "dev": "concurrently --kill-others \"npm run serve\" \"nodemon server.js\"",
     "postinstall": "npm run build",
     "start": "node server.js"
-  }, 
+  },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.1",
     "axios": "^0.18.0",
