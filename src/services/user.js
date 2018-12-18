@@ -10,7 +10,8 @@ const userService = {
     url: 'id' in data ? `/api/user/${data.id}` : '/api/user',
     data
   }),
-  delete: id => http.delete(`/api/user/${id}`)
+  delete: id => http.delete(`/api/user/${id}`),
+  pdfTest: () => http.get('/pdf/example', { responseType: 'arraybuffer' })
 }
 
 export default userService

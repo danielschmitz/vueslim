@@ -1,6 +1,10 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" fixed app>
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      app
+    >
       <v-list dense>
         <v-list-tile>
           <v-list-tile-action>
@@ -29,11 +33,14 @@
         <v-card-text>
           {{dialog.text}}
         </v-card-text>
-          <v-card-text style="padding-bottom:1px">
-              <p class="text-xs-center">
-              <v-btn :color="dialog.color" @click="dialog.show=false">Ok</v-btn>
-              </p>
-          </v-card-text>
+        <v-card-text style="padding-bottom:1px">
+          <p class="text-xs-center">
+            <v-btn
+              :color="dialog.color"
+              @click="dialog.show=false"
+            >Ok</v-btn>
+          </p>
+        </v-card-text>
       </v-card>
     </v-dialog>
 
@@ -48,28 +55,67 @@
         flat
         @click="toast.show = false"
       >
-      <v-icon>close</v-icon>
+        <v-icon>close</v-icon>
       </v-btn>
     </v-snackbar>
 
-    <v-dialog v-model="confirm.show" persistent max-width="290">
-        <v-card>
-          <v-card-text>{{confirm.text}}</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn flat @click="confirm.choice(false)">Não</v-btn>
-            <v-btn flat @click="confirm.choice(true)">Sim</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+    <v-dialog
+      v-model="confirm.show"
+      persistent
+      max-width="290"
+    >
+      <v-card>
+        <v-card-text>{{confirm.text}}</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            flat
+            @click="confirm.choice(false)"
+          >Não</v-btn>
+          <v-btn
+            flat
+            @click="confirm.choice(true)"
+          >Sim</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog
+      v-model="loading.show"
+      width="200px"
+      height="300px"
+      persistent
+    >
+      <v-card>
+        <v-card-text>
+          <div class="text-xs-center">
+            <v-progress-circular
+              :width="3"
+              :size="80"
+              color="red"
+              indeterminate
+            ></v-progress-circular>
+          </div>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
 
     <v-content>
       <v-card>
-        <v-img class="white--text" src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" aspect-ratio="9">
+        <v-img
+          class="white--text"
+          src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+          aspect-ratio="9"
+        >
 
           <div style="padding-left:15px">
             <h3 class="headline mb-0">
-              <v-btn flat icon dark @click="drawer=!drawer">
+              <v-btn
+                flat
+                icon
+                dark
+                @click="drawer=!drawer"
+              >
                 <v-icon>menu</v-icon>
               </v-btn>Welcome to Vue!
             </h3>
@@ -87,8 +133,18 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn flat color="orange" href="https://github.com/danielschmitz/vueslim" target="_blank">Github project</v-btn>
-            <v-btn flat color="orange" href="http://vueslim.herokuapp.com" target="_blank">Demo app</v-btn>
+            <v-btn
+              flat
+              color="orange"
+              href="https://github.com/danielschmitz/vueslim"
+              target="_blank"
+            >Github project</v-btn>
+            <v-btn
+              flat
+              color="orange"
+              href="http://vueslim.herokuapp.com"
+              target="_blank"
+            >Demo app</v-btn>
           </v-card-actions>
         </v-card>
       </div>
@@ -107,7 +163,8 @@ export default {
       drawer: null,
       toast: alertService.config.snackbar,
       dialog: alertService.config.dialog,
-      confirm: alertService.config.confirm
+      confirm: alertService.config.confirm,
+      loading: alertService.config.loading
     }
   }
 }

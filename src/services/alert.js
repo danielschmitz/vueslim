@@ -11,6 +11,9 @@ const alertService = {
       color: 'primary',
       text: ''
     },
+    loading: {
+      show: false
+    },
     confirm: {
       show: false,
       text: '',
@@ -44,7 +47,12 @@ const alertService = {
     this.config.dialog.text = msg
     this.config.dialog.show = true
   },
-
+  showLoading: function () {
+    this.config.loading.show = true
+  },
+  hideLoading: function () {
+    this.config.loading.show = false
+  },
   confirm: function (msg, callback) {
     this.config.confirm.text = msg
     this.config.confirm.callback = callback

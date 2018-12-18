@@ -115,6 +115,17 @@ export default {
       alertService.toast('Saiu')
       this.users = []
     },
+    pdfTest () {
+      alertService.showLoading()
+      userService.pdfTest().then(response => {
+        let blob = new Blob([response.data], { type: 'application/pdf' })
+        let link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.download = 'test.pdf'
+        link.click()
+        alertService.hideLoading()
+      })
+    },
     CreateTables () {
       alertService.confirm('Você tem certeza? Todos os dados da tabela abaixo serão perdidos', (resposta) => {
         if (resposta) {
@@ -132,15 +143,22 @@ export default {
 </script>
 <template>
   <div>
-    <v-btn @click="Login()" v-if="!store.isLogged()">Fake Login</v-btn>
+    <v-btn
+      @click="Login()"
+      v-if="!store.isLogged()"
+    >Fake Login</v-btn>
 
-    <v-card class="elevation-0" v-if="store.isLogged()">
+    <v-card
+      class="elevation-0"
+      v-if="store.isLogged()"
+    >
       <v-btn
         @click="Logout()"
         v-if="store.isLogged()"
       >Logout</v-btn>
       <v-btn @click="CreateTables()">Criar tabela user</v-btn>
       <v-btn @click="refreshUsers()">Refresh Users</v-btn>
+      <v-btn @click="pdfTest()">PDF Generation Test</v-btn>
       <v-card-title>
         <h3>Users</h3>
         <v-spacer></v-spacer>
